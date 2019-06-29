@@ -21,7 +21,7 @@ module.exports = {
             .catch((err)=>{
                 console.log(err)
             })
-        }else{
+        }else if(Object.keys(req.query)[0] === undefined){
             model.getBooks()
             .then((results)=>{
                 result = results
@@ -30,6 +30,8 @@ module.exports = {
             .catch((err)=>{
                 console.log(err)
             })
+        }else{
+            res.send({error:"Not found",status:404,message:`${Object.keys(req.query)[0]} Not Found`})
         }
     },
     getBook : (req,res) =>{
